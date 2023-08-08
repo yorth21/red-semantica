@@ -171,7 +171,7 @@ function App() {
                 <select
                   name=""
                   id="nodoPadre"
-                  className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Padre...</option>
                   {nodos.map((nodo, index) => (
@@ -188,7 +188,7 @@ function App() {
                 <select
                   name=""
                   id="nodoHijo"
-                  className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Hijo...</option>
                   {nodos.map((nodo, index) => (
@@ -216,7 +216,7 @@ function App() {
                 <select
                   name=""
                   id="nodoInicio"
-                  className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Inicio...</option>
                   {nodos.map((nodo, index) => (
@@ -233,7 +233,7 @@ function App() {
                 <select
                   name=""
                   id="nodoFin"
-                  className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Objetivo...</option>
                   {nodos.map((nodo, index) => (
