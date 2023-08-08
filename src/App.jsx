@@ -142,7 +142,7 @@ function App() {
         <Header />
         <Logo />
 
-        <section className="bg-sky-950 col-span-3 md:col-span-2 text-slate-300 rounded-3xl flex flex-col gap-6 relative aspect-[2/1] md:aspect-square lg:aspect-[2/1] shadow-sm p-8">
+        <section className="bg-sky-950 col-span-3 md:col-span-2 text-slate-300 rounded-3xl flex flex-col justify-around relative aspect-[2/1] md:aspect-square lg:aspect-[2/1] shadow-sm p-8">
           <form className="flex flex-col" onSubmit={crearNodo}>
             <h3 className="text-2xl font-bold">Crear Nodo</h3>
             <div className="flex flex-row mt-4 gap-4 items-end">
@@ -208,7 +208,7 @@ function App() {
           </form>
         </section>
 
-        <section className="bg-sky-950 col-span-3 md:col-span-2 text-slate-300 rounded-3xl flex flex-col gap-6 relative aspect-[2/1] md:aspect-square lg:aspect-[2/1] shadow-sm p-8">
+        <section className="bg-sky-950 col-span-3 md:col-span-2 text-slate-300 rounded-3xl flex flex-col justify-around relative aspect-[2/1] md:aspect-square lg:aspect-[2/1] shadow-sm p-8">
           <form className="flex flex-col" onSubmit={buscarCamino}>
             <h3 className="text-2xl font-bold">Buscar Camino</h3>
             <div className="flex flex-col items-center lg:flex-row mt-2 gap-4 lg:items-end">
@@ -248,6 +248,14 @@ function App() {
               </button>
             </div>
           </form>
+
+          <p className="text-sm">
+            <strong>Nota: </strong>
+            El algoritmo de anchura, también conocido como BFS, encuentra el
+            camino más corto entre nodos en un grafo. Explora por niveles y es
+            útil en grafos pequeños o no ponderados, aunque puede no ser óptimo
+            en grafos con pesos variables.
+          </p>
         </section>
 
         <section className="bg-sky-950 col-span-3 md:col-span-2 text-slate-300 rounded-3xl flex flex-col gap-6 relative aspect-square shadow-sm p-8">
@@ -281,7 +289,7 @@ function App() {
           </div>
         </section>
 
-        <section className="bg-sky-950 col-span-3 md:col-span-2 text-white rounded-3xl flex relative overflow-hidden aspect-square shadow-sm p-8 justify-center items-center">
+        <section className="bg-sky-950 col-span-3 md:col-span-2 text-white rounded-3xl flex aspect-square shadow-sm p-8">
           {camino ? (
             <div className="flex flex-col items-center">
               <h3 className="text-2xl font-bold mb-4">Camino</h3>
