@@ -293,7 +293,7 @@ function App() {
           {camino ? (
             <div className="flex flex-col items-center">
               <h3 className="text-2xl font-bold mb-4">Camino</h3>
-              <div className="bg-cyan-900 flex flex-row m-1 py-1 pr-6 pl-2 rounded-lg relative">
+              <div className="bg-cyan-900 flex flex-row flex-wrap justify-center m-1 py-1 pr-6 pl-2 rounded-lg relative">
                 {camino.map((nodo, index) => (
                   <div key={nodo.valor} className="flex flex-row items-center ">
                     <span className="text-2xl font-bold">{nodo.valor}</span>
