@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Logo from "./components/Logo";
 import { encontrarCamino } from "./logic/redSemantica.js";
 import SinResultados from "./components/SinResultados";
+import Resultados from "./components/Resultados";
 
 class Nodo {
   constructor(valor) {
@@ -15,7 +16,8 @@ class Nodo {
 
 function App() {
   const [nodos, setNodos] = useState([]);
-  const [camino, setCamino] = useState([]);
+  const [camino, setCamino] = useState(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   const agregarNodo = (valor) => {
     const nodo = new Nodo();
@@ -134,6 +136,10 @@ function App() {
     const nodoObjetivo = validarNodo(valorObjetivo);
 
     setCamino(encontrarCamino(nodoInicio, nodoObjetivo));
+
+    if (!isSearching) {
+      setIsSearching(true);
+    }
   };
 
   return (
@@ -146,18 +152,18 @@ function App() {
           <form className="flex flex-col" onSubmit={crearNodo}>
             <h3 className="text-2xl font-bold">Crear Nodo</h3>
             <div className="flex flex-row mt-4 gap-4 items-end">
-              <div>
+              <div className="w-full">
                 <input
                   type="text"
                   id="nombreNodo"
-                  className="bg-sky-900 w-full border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="w-full bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                   placeholder="Nombre Nodo..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg py-2 px-8 hover:bg-sky-800 hover:border-sky-900 transition-colors"
+                className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg py-2 px-8 whitespace-nowrap hover:bg-sky-800 hover:border-sky-900 transition-colors"
               >
                 Crear Nodo
               </button>
@@ -171,7 +177,7 @@ function App() {
                 <select
                   name=""
                   id="nodoPadre"
-                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] lg:max-w-[7rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Padre...</option>
                   {nodos.map((nodo, index) => (
@@ -188,7 +194,7 @@ function App() {
                 <select
                   name=""
                   id="nodoHijo"
-                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] lg:max-w-[7rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Hijo...</option>
                   {nodos.map((nodo, index) => (
@@ -200,7 +206,7 @@ function App() {
               </div>
               <button
                 type="submit"
-                className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg py-2 px-8 hover:bg-sky-800 hover:border-sky-900 transition-colors"
+                className="bg-sky-900 border-2 border-sky-700 text-md rounded-lg py-2 px-8 whitespace-nowrap hover:bg-sky-800 hover:border-sky-900 transition-colors"
               >
                 Crear Relacion
               </button>
@@ -216,7 +222,7 @@ function App() {
                 <select
                   name=""
                   id="nodoInicio"
-                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] lg:max-w-[7rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Inicio...</option>
                   {nodos.map((nodo, index) => (
@@ -233,7 +239,7 @@ function App() {
                 <select
                   name=""
                   id="nodoFin"
-                  className="max-w-[10rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
+                  className="max-w-[10rem] lg:max-w-[7rem] bg-sky-900 border-2 border-sky-700 text-md rounded-lg p-2 focus:outline-none focus:bg-sky-800 focus:border-sky-900 transition-colors"
                 >
                   <option value="">Objetivo...</option>
                   {nodos.map((nodo, index) => (
@@ -290,24 +296,31 @@ function App() {
         </section>
 
         <section className="bg-sky-950 col-span-3 md:col-span-2 text-white rounded-3xl flex aspect-square shadow-sm p-8">
-          {camino ? (
-            <div className="flex flex-col items-center">
-              <h3 className="text-2xl font-bold mb-4">Camino</h3>
-              <div className="bg-cyan-900 flex flex-row flex-wrap justify-center m-1 py-1 pr-6 pl-2 rounded-lg relative">
-                {camino.map((nodo, index) => (
-                  <div key={nodo.valor} className="flex flex-row items-center ">
-                    <span className="text-2xl font-bold">{nodo.valor}</span>
-                    {index !== camino.length - 1 && (
-                      <span className="p-2.5">
-                        <FaArrowRight />
-                      </span>
-                    )}
-                  </div>
-                ))}
+          {isSearching ? (
+            camino ? (
+              <div className="flex flex-col">
+                <h3 className="text-2xl font-bold">Camino encontrado:</h3>
+                <div className="bg-cyan-900 flex flex-row flex-wrap justify-center mt-2 py-1 px-4 rounded-lg">
+                  {camino.map((nodo, index) => (
+                    <div
+                      key={nodo.valor}
+                      className="flex flex-row items-center "
+                    >
+                      <span className="text-2xl font-bold">{nodo.valor}</span>
+                      {index !== camino.length - 1 && (
+                        <span className="p-2.5">
+                          <FaArrowRight />
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <SinResultados />
+            )
           ) : (
-            <SinResultados />
+            <Resultados />
           )}
         </section>
       </div>
